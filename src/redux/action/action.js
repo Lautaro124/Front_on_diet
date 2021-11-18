@@ -8,7 +8,7 @@ export function getFood(){
     try{
       const foods = await axios.get(food)
 
-      console.log(food)
+      console.log('food')
       
       return dispatch({
         type: GET_FOOD,
