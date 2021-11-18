@@ -1,22 +1,25 @@
+import { useDispatch } from 'react-redux';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { getFood } from './redux/action/action'
 import './App.css'
+import Home from './components/home/Home'
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  dispatch(getFood())
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path='/' element={<Home />}>
+
+          </Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
