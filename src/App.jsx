@@ -8,23 +8,21 @@ import Food from './components/forms/createFood/Food'
 
 function App() {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getFood())
+  // useEffect(() => {
+  //   dispatch(getFood())
 
-    console.log('algop')
-  },[dispatch])
+  //   console.log('algop')
+  // },[dispatch])
 
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path='/' element={<Home />}>
-            <Route path='Food' element={<Food />}>
-              
-            </Route>
-          </Route>
+          <Route path='/' element={<Home />}/>
+          <Route path='/Food' element={<Food />}/>
+          <Route path='*' element={<h1>Not Found</h1>}/>
         </Routes>
       </div>
     </BrowserRouter>

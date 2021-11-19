@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <h2>Welcom home</h2>
-      <Link to='/Food'>
+      <Link to='/food'>
         <button>
           Create food 
         </button> 
