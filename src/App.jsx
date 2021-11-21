@@ -5,16 +5,16 @@ import { getFood } from './redux/action/action'
 import './App.css'
 import Home from './components/home/Home'
 import Food from './components/forms/createFood/Food'
+import Cards from './components/cards/Cards'
 
 function App() {
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   dispatch(getFood())
-
-  //   console.log('algop')
-  // },[dispatch])
+/// Dispatcher all data 
+  useEffect(() => {
+    dispatch(getFood())
+  },[dispatch])
 
   return (
     <BrowserRouter>
@@ -22,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/Food' element={<Food />}/>
+          <Route path='/Vew/:Type' element={<Cards />}/>
           <Route path='*' element={<h1>Not Found</h1>}/>
         </Routes>
       </div>
