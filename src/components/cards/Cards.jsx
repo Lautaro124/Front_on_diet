@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Food from './food/Food'
 
@@ -9,6 +9,7 @@ export default function Cards() {
   const { Type } = useParams()
   return (
     <div>
+      <Link to='/'>Home</Link>
       {/* Mapeo de informacion correspondiente */}
       {
         Type && Type === 'Food'?

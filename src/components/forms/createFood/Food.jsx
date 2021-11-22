@@ -15,7 +15,7 @@ export default function Food() {
 
   // Validador de informacion
   const shapeFood = Yup.object().shape({
-    Name: Yup.string().required('Required'),
+    Name: Yup.string().required('Requerido'),
     Description: Yup.string()
   })
 

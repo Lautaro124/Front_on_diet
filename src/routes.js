@@ -17,5 +17,7 @@ export const combination = `${url}/combination`
 const view = '/Vew/'
 
 export const createFood = '/Food'
+export const createUser = '/RegisterAcount'
+export const getUser = '/LoginAcount'
 export const viewFood = `${view}Food`
 export const viewCombination = `${view}Combination`

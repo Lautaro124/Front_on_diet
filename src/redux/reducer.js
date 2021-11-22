@@ -1,7 +1,8 @@
-import { GET_FOOD, POST_FOOD } from './action/constrain'
+import { GET_FOOD, POST_FOOD, POST_USER, GET_USER } from './action/constrain'
 
 const initialState = {
-  food: []
+  food: [],
+  user: {}
 }
 
 export default function reducer(state = initialState, action) {
@@ -19,6 +20,19 @@ export default function reducer(state = initialState, action) {
         ...state,
         food: [...state.food, action.payload]
       }
+    
+    case POST_USER:
+      return{
+        ...state,
+        user: action.payload
+      }
+    
+    case GET_USER:
+      return{
+        ...state,
+        user: action.payload
+      }
+
     default:
       return state
   }

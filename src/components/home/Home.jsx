@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { viewFood, createFood } from '../../routes'
+import { viewFood, createFood, createUser, getUser } from '../../routes'
 
 export default function Home() {
   return (
@@ -19,6 +19,20 @@ export default function Home() {
         <button>
           Show food
         </button> 
+      </Link>
+
+      {/* Crear usuarios */}
+      <Link to={createUser}>
+        <button>
+          Create acount
+        </button>
+      </Link>
+
+      {/* login */}
+      <Link to={getUser}>
+        <button>
+          Login
+        </button>
       </Link>
     </div>
   )

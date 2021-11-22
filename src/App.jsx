@@ -6,6 +6,8 @@ import './App.css'
 import Home from './components/home/Home'
 import Food from './components/forms/createFood/Food'
 import Cards from './components/cards/Cards'
+import Register from './components/forms/createAcount/Register'
+import Login from './components/forms/getAcount/Login'
 
 function App() {
 
@@ -23,6 +25,9 @@ function App() {
           <Route path='/' element={<Home />}/>
           <Route path='/Food' element={<Food />}/>
           <Route path='/Vew/:Type' element={<Cards />}/>
+          <Route path='/RegisterAcount' element={<Register />}/>
+          <Route path='/LoginAcount' element={<Login />}/>
+          {/* Rutas no existentes */}
           <Route path='*' element={<h1>Not Found</h1>}/>
         </Routes>
       </div>
