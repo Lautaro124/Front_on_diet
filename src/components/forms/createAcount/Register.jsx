@@ -17,7 +17,8 @@ export default function Register() {
     password: '', 
     phone: '', 
     adress: '',
-    numeration: ''
+    numeration: '',
+    location: ''
   }
 
   const reCaptcha = () => {
@@ -42,7 +43,10 @@ export default function Register() {
     .required('Requerido'),
     numeration: Yup.number()
     .min(100,'El numero tiene que tener 3 digitos como minimo')
-    .max(9999, 'La numeracion no puede tener mas de 4 digitos').required('Requerido')
+    .max(9999, 'La numeracion no puede tener mas de 4 digitos').required('Requerido'),
+    location: Yup.string()
+    .matches(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u, 'No se permiten numeros')
+    .required('Requerido')
   })
 
   return (
@@ -83,6 +87,9 @@ export default function Register() {
           <label>Numeracion</label>
           <Field name='numeration' type='number'/>
           <ErrorMessage name='numeration'/>
+          <label>Partido</label>
+          <Field name='location'/>
+          <ErrorMessage name='location'/>
 
           {/* Numero celular */}
           <label>Numero de celular</label>

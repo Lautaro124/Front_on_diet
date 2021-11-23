@@ -1,6 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 //////                                  Back URL                                   //////
 /////////////////////////////////////////////////////////////////////////////////////////
+
 const url = 'http://localhost:3001'
 
 export const food = `${url}/food`
@@ -21,3 +22,4 @@ export const createUser = '/RegisterAcount'
 export const getUser = '/LoginAcount'
 export const viewFood = `${view}Food`
 export const viewCombination = `${view}Combination`
+export const createCombination = `/Combination`

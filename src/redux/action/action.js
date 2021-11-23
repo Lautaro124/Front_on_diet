@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { food, user } from '../../routes.js'
-import { GET_FOOD, POST_FOOD, POST_USER, GET_USER } from './constrain'
+import { food, user, combination } from '../../routes.js'
+import { GET_FOOD, POST_FOOD, POST_USER, GET_USER, POST_COMBINATION } from './constrain'
 
 /// Function get food
 export function getFood(){
@@ -58,7 +58,7 @@ export function createUser({firstName, lastName, mail, password, phone, adress, 
       })
     }
     catch(err){
-      console.error(err)
+      alert(err)
     }
   }
 }
@@ -68,7 +68,7 @@ export function createUser({firstName, lastName, mail, password, phone, adress, 
 export function getAccount({mail, password}){
   return async function(dispatch){
     try{
-      const account = await axios.get(user, {mail, password})
+      const account = await axios.get(`${user}/${mail}/${password}`)
 
       // Guardar la informacion del usuario en su propia computadora
       const save = JSON.stringify(account.data)
@@ -80,7 +80,24 @@ export function getAccount({mail, password}){
       })
     }
     catch(err){
-      console.error(err)
+      alert(err)
+    }
+  }
+}
+
+// Function post combination
+export function postCombination({Lunch, LunchDessert, Dinner, DinnerDessert}){
+  return async function (dispatch) {
+    try{
+      const info = await axios.post(combination, {Lunch, LunchDessert, Dinner, DinnerDessert})
+  
+      return dispatch({
+        type: POST_COMBINATION,
+        payload: info.data
+      })
+    }
+    catch(err){
+      alert(err)
     }
   }
 }
