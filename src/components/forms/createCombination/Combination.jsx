@@ -1,11 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { postCombination } from '../../../redux/action/action'
 import { Link } from 'react-router-dom'
-import { Formik, Form, ErrorMessage  } from 'formik'
+import { Formik, Form, Field, ErrorMessage  } from 'formik'
 import * as Yup from 'yup'
 
 export default function Combination() {
 
+  const dispatch = useDispatch()
   const initialValue = {
     Lunch: '', 
     LunchDessert: '', 
@@ -22,6 +24,42 @@ export default function Combination() {
     DinnerDessert: Yup.string(), 
   })
 
+  const submitted = (e)=> {
+    const combination = {
+      Lunch: foods.find(data => data.Name === e.Lunch), 
+      LunchDessert: foods.find(data => data.Name === e.LunchDessert), 
+      Dinner: foods.find(data => data.Name === e.Dinner), 
+      DinnerDessert: foods.find(data => data.Name === e.DinnerDessert)
+    }
+
+    console.log(combination)
+    if(!combination.LunchDessert && !combination.DinnerDessert){
+      dispatch(postCombination({
+        Lunch: combination.Lunch._id,
+        Dinner: combination.Dinner._id, 
+      }))
+    }else if(combination.LunchDessert && !combination.DinnerDessert){
+      dispatch(postCombination({
+        Lunch: combination.Lunch._id,
+        LunchDessert: combination.LunchDessert._id,
+        Dinner: combination.Dinner._id, 
+      }))
+    }else if(!combination.LunchDessert && combination.DinnerDessert){
+      dispatch(postCombination({
+        Lunch: combination.Lunch._id,
+        Dinner: combination.Dinner._id, 
+        DinnerDessert: combination.DinnerDessert._id,
+      }))
+    }else{
+      dispatch(postCombination({
+        Lunch: combination.Lunch._id,
+        LunchDessert: combination.LunchDessert._id,
+        Dinner: combination.Dinner._id, 
+        DinnerDessert: combination.DinnerDessert._id,
+      }))
+    }
+  }
+
   return (
     <div>
       <Link to='/'>Home</Link>
@@ -29,44 +67,39 @@ export default function Combination() {
         initialValues={initialValue}
         validationSchema={shapeYup}
         onSubmit={(e) => {
-          console.log(e)
+          submitted(e)
         }}>
         <Form>
           {/* Almuerzo */}
-          <select name='Lunch' defaultValue='None'>
-            {
-              foods?.map(food => <option value={food.Name} >{food.Name}</option>)
-            }
-          </select>
+          <label>Almuerzo</label>
+          <Field name='Lunch' list='Luncher'/>
           <ErrorMessage name='Lunch'/>
 
           {/* Postre de almuerzo */}
-          <select name='LunchDessert' defaultValue='None'>
-            {
-              foods?.map(food => <option value={food.Name} >{food.Name}</option>)
-            }
-          </select>
+          <label>Postre de almuerzo</label>
+          <Field name='LunchDessert' list='Luncher'/>
           <ErrorMessage name='LunchDessert'/>
 
           {/* Cena */}
-          <select name='Dinner' defaultValue='None'>
-            {
-              foods?.map(food => <option value={food.Name} >{food.Name}</option>)
-            }
-          </select>
+          <label>Cena</label>
+          <Field name='Dinner' list='Luncher'/>
           <ErrorMessage name='Dinner'/>
 
           {/* Postre de cena */}
-          <select name='DinnerDessert' defaultValue='None'>
-            {
-              foods?.map(food => <option value={food.Name} >{food.Name}</option>)
-            }
-          </select>
+          <label>Postre de cena</label>
+          <Field name='DinnerDessert' list='Luncher'/>
           <ErrorMessage name='DinnerDessert'/>
 
+          {/* Lista de comidas */}
+          <datalist id='Luncher'>
+            {
+              foods?.map(food => <option key={food._id} value={food.Name} />)
+            }
+          </datalist>
           <button type='submit'>Send</button>
         </Form>
       </Formik>
+
     </div>
   )
 }
