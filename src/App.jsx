@@ -9,6 +9,7 @@ import Cards from './components/cards/Cards'
 import Register from './components/forms/createAcount/Register'
 import Login from './components/forms/getAcount/Login'
 import Combination from './components/forms/createCombination/Combination'
+import Navbar from './components/navbar/Navbar'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <Navbar/>
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/Food' element={<Food />}/>
