@@ -4,12 +4,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getFood } from './redux/action/action'
 import './App.css'
 import Home from './components/home/Home'
-import Food from './components/forms/createFood/Food'
+import NewFood from './components/forms/createFood/NewFood'
 import Cards from './components/cards/Cards'
 import Register from './components/forms/createAcount/Register'
 import Login from './components/forms/getAcount/Login'
 import Combination from './components/forms/createCombination/Combination'
-import Navbar from './components/navbar/Navbar'
+import Header from './components/header/Header';
+import {getRoutes} from './utils';
+
+const mainRoutes = getRoutes('mainRoutes');
 
 function App() {
 
@@ -23,14 +26,14 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar/>
+        <Header/>
         <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/Food' element={<Food />}/>
-          <Route path='/Vew/:Type' element={<Cards />}/>
-          <Route path='/RegisterAcount' element={<Register />}/>
-          <Route path='/LoginAcount' element={<Login />}/>
-          <Route path='/Combination' element={<Combination />}/>
+          <Route path={mainRoutes.home} element={<Home />}/>
+          <Route path={mainRoutes.createFood} element={<NewFood />}/>
+          <Route path={mainRoutes.food} element={<Cards />}/>
+          <Route path={mainRoutes.register} element={<Register />}/>
+          <Route path={mainRoutes.login} element={<Login />}/>
+          <Route path={mainRoutes.createCombination} element={<Combination />}/>
           {/* Rutas no existentes */}
           <Route path='*' element={<h1>Not Found</h1>}/>
         </Routes>

@@ -59,7 +59,7 @@ export default function Register() {
         validationSchema={shapeYup}
         onSubmit={(e) => {
           if(!captcha.current.getValue()) {
-            alert('Se necesia el recapcha hecho para proseguir')
+            alert('Se necesita el recapcha hecho para proseguir')
           }
           else{
             dispatch(createUser({...e, phone: '+549-' + e.phone}))

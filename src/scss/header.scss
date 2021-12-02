@@ -1,0 +1,44 @@
+.navbar-logo {
+    cursor: pointer;
+    color: black;
+}
+
+.link:hover ,
+.active{
+  transform: scale(1.1) !important;
+}
+
+.link {
+    margin: 0.6em 0.9em !important;
+}
+
+.nav-list{
+    background-color: #e2ece9b9 !important;
+}
+
+.navbar{
+    background-color: #BEE1E6 !important;
+}
+
+.nav-burger {
+    color: black !important;
+}
+
+.btn-register,
+.btn-login {
+    color: black !important;
+    background-color: #34f0b7 !important ;
+}
+
+.btn-login {
+    color: black !important;
+    background-color: #E2ECE9 !important ;
+}
+
+.btn-register:hover {
+    background-color: #E2ECE9 !important ;
+}
+
+.btn-login:hover {
+    background-color: #34f0b7 !important ;
+}
