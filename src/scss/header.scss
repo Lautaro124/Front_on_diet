@@ -1,44 +1,51 @@
 .navbar-logo {
-    cursor: pointer;
-    color: black;
+  cursor: pointer;
 }
 
-.link:hover ,
-.active{
+.link:hover,
+.active {
   transform: scale(1.1) !important;
 }
 
 .link {
-    margin: 0.6em 0.9em !important;
+  margin: 0.6em 0.9em !important;
 }
 
-.nav-list{
-    background-color: #e2ece9b9 !important;
+.nav-list {
+  background-color: var(--light-green) !important;
 }
 
-.navbar{
-    background-color: #BEE1E6 !important;
+.navbar {
+  background-color: var(--light-blue) !important;
 }
 
-.nav-burger {
-    color: black !important;
-}
-
+.navbar-logo,
+.nav-burger,
 .btn-register,
 .btn-login {
-    color: black !important;
-    background-color: #34f0b7 !important ;
+  color: var(--black) !important;
+  text-shadow: 0px 0px 3px var(--white);
+  font-weight: 700 !important;
+}
+
+.btn-register {
+  background-color: var(--primary) !important ;
 }
 
 .btn-login {
-    color: black !important;
-    background-color: #E2ECE9 !important ;
+  background-color: var(--secondary) !important ;
+}
+
+.btn-register:hover,
+.btn-login:hover {
+  color: var(--white) !important;
+  text-shadow: none;
 }
 
 .btn-register:hover {
-    background-color: #E2ECE9 !important ;
+  background-color: var(--secondary)!important ;
 }
 
 .btn-login:hover {
-    background-color: #34f0b7 !important ;
+  background-color: var(--primary) !important ;
 }

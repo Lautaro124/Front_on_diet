@@ -1,63 +1,61 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import ListItems from '../navbar/listItems/ListItems';
-import { getRoutes } from '../../utils';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import * as React from 'react'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import Menu from '@mui/material/Menu'
+import MenuIcon from '@mui/icons-material/Menu'
+import Container from '@mui/material/Container'
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+import Tooltip from '@mui/material/Tooltip'
+import MenuItem from '@mui/material/MenuItem'
+import SwipeableDrawer from '@mui/material/SwipeableDrawer'
+import ListItems from '../navbar/listItems/ListItems'
+import {getRoutes} from '../../utils'
+import {useNavigate, useLocation} from 'react-router-dom'
+import {useSelector} from 'react-redux'
 import get from 'lodash/get'
 
-const mainRoutes = getRoutes('mainRoutes');
+const mainRoutes = getRoutes('mainRoutes')
 
 const Header = props => {
-    const navigate = useNavigate()
+	const navigate = useNavigate()
 	const location = useLocation()
-	const navigationHeader = useSelector(state => state.navigationHeader);
-	const navigationSettings = useSelector(state => state.navigationSettings);
-	const [open, setOpen] = React.useState(false);
+	const navigationHeader = useSelector(state => state.navigationHeader)
+	const navigationSettings = useSelector(state => state.navigationSettings)
+	const [open, setOpen] = React.useState(false)
 
-	const [activeTab, setActiveTab] = React.useState(location.pathname);
-	const [anchorElNav, setAnchorElNav] = React.useState(null);
-	const [anchorElUser, setAnchorElUser] = React.useState(null);
+	const [activeTab, setActiveTab] = React.useState(location.pathname)
+	const [anchorElNav, setAnchorElNav] = React.useState(null)
+	const [anchorElUser, setAnchorElUser] = React.useState(null)
 
 	const handleOpenNavMenu = event => {
-		setAnchorElNav(event.currentTarget);
-	};
+		setAnchorElNav(event.currentTarget)
+	}
 	const handleOpenUserMenu = event => {
-		setAnchorElUser(event.currentTarget);
-	};
+		setAnchorElUser(event.currentTarget)
+	}
 
 	const handleCloseNavMenu = () => {
-		setAnchorElNav(null);
-	};
+		setAnchorElNav(null)
+	}
 
 	const handleCloseUserMenu = () => {
-		setAnchorElUser(null);
-    };
-    
-    const handleNavMenuClick = (uri, type) => {
-        if (type === "nav") {
-            handleCloseNavMenu();
-		}
-		else {
-            handleCloseUserMenu();
+		setAnchorElUser(null)
+	}
+
+	const handleNavMenuClick = (uri, type) => {
+		if (type === 'nav') {
+			handleCloseNavMenu()
+		} else {
+			handleCloseUserMenu()
 		}
 		setOpen(false)
-        setActiveTab(uri)
-        return navigate(uri)
-
-    }
+		setActiveTab(uri)
+		return navigate(uri)
+	}
 
 	return (
 		<header>
@@ -65,14 +63,16 @@ const Header = props => {
 				<Container maxWidth='xxl'>
 					<Toolbar disableGutters>
 						<IconButton
+							key='nav-burger-md'
 							size='large'
 							edge='start'
 							color='inherit'
 							className='nav-burger'
 							aria-label='menu'
 							sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
+							onClick={() => setOpen(!open)}
 						>
-							<MenuIcon onClick={() => setOpen(true)} />
+							<MenuIcon />
 							<SwipeableDrawer
 								anchor='left'
 								open={open}
@@ -82,6 +82,7 @@ const Header = props => {
 								<ListItems
 									handleNavMenuClick={handleNavMenuClick}
 									activeTab={activeTab}
+									key='nav-list-links'
 								/>
 							</SwipeableDrawer>
 						</IconButton>
@@ -104,6 +105,7 @@ const Header = props => {
 							}}
 						>
 							<IconButton
+								key='nav-user'
 								size='large'
 								aria-label='account of current user'
 								aria-controls='menu-appbar'
@@ -203,7 +205,11 @@ const Header = props => {
 							component='div'
 							sx={{
 								flexGrow: 1,
-								display: {xs: 'flex', md: 'none', justifyContent:'center'},
+								display: {
+									xs: 'flex',
+									md: 'none',
+									justifyContent: 'center',
+								},
 							}}
 							onClick={() => handleNavMenuClick(mainRoutes.home)}
 							className='navbar-logo'
@@ -222,6 +228,7 @@ const Header = props => {
 						>
 							<Tooltip title='Opciones de Usuario'>
 								<IconButton
+									key="user-settings"
 									onClick={handleOpenUserMenu}
 									sx={{p: 0}}
 								>
@@ -270,40 +277,42 @@ const Header = props => {
 							</Menu>
 						</Box> */}
 						<Box
-						sx={{
-							flexGrow: 1,
-							display: {
-								xs: 'none',
-								md: 'flex',
-								justifyContent: 'flex-end',
-							},
-						}}
-					>
-						<Button
-							onClick={() => handleNavMenuClick(mainRoutes.login)}
-							sx={{m: 2, color: 'white', display: 'block'}}
-							color='secondary'
-							className='btn-login'
-							variant='contained'
+							sx={{
+								flexGrow: 1,
+								display: {
+									xs: 'none',
+									md: 'flex',
+									justifyContent: 'flex-end',
+								},
+							}}
 						>
-							Iniciar
-						</Button>
-						<Button
-							onClick={() =>
-								handleNavMenuClick(mainRoutes.register)
-							}
-							sx={{my: 2, color: 'white', display: 'block'}}
+							<Button
+								onClick={() =>
+									handleNavMenuClick(mainRoutes.login)
+								}
+								sx={{m: 2, color: 'white', display: 'block'}}
+								color='secondary'
+								className='btn-login'
+								variant='contained'
+							>
+								Iniciar
+							</Button>
+							<Button
+								onClick={() =>
+									handleNavMenuClick(mainRoutes.register)
+								}
+								sx={{my: 2, color: 'white', display: 'block'}}
 								color='primary'
-								className="btn-register"
-							variant='contained'
-						>
-							Registrar
-						</Button>
-					</Box>
+								className='btn-register'
+								variant='contained'
+							>
+								Registrar
+							</Button>
+						</Box>
 					</Toolbar>
 				</Container>
 			</AppBar>
 		</header>
-	);
-};
-export default Header;
+	)
+}
+export default Header

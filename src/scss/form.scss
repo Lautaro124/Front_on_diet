@@ -1,0 +1,16 @@
+.field-grid {
+    margin: 2em 0  !important;
+}
+
+.btn-submit {
+  background-color: var(--primary) !important; 
+  color: var(--white) !important;
+  font-weight: bold !important;
+  text-shadow: 0px 0px 3px var(--black);
+}
+
+.btn-submit:hover {
+  background-color: var(--secondary)!important ;
+  color: var(--black) !important;
+  text-shadow: none;
+}
