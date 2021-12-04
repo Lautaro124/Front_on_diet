@@ -5,6 +5,8 @@
 const url = 'http://localhost:3001'
 
 export const food = `${url}/food`
+export const changed = `${url}/food/Changed`
+export const deleted = `${url}/food/Deleted`
 export const user = `${url}/user`
 export const combination = `${url}/combination`
 

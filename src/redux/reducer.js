@@ -2,8 +2,6 @@ import { GET_FOOD, POST_FOOD, POST_USER, GET_USER } from './action/constrain'
 import { getRoutes } from '../utils';
 const mainRoutes = getRoutes('mainRoutes');
 
-
-
 const initialState = {
 	food: [],
 	user: {},
@@ -15,9 +13,9 @@ const initialState = {
 			id: 'home',
 		},
 		{
-			name: 'createFood',
-			label: 'Crear Comida',
-			uri: mainRoutes.createFood,
+			name: 'editFood',
+			label: 'Editar Comidas',
+			uri: mainRoutes.editFood,
 			id: 'createFood',
 		},
 		{
@@ -52,7 +50,6 @@ const initialState = {
 export default function reducer(state = initialState, action) {
 
   switch (action.type) {
-
     case GET_FOOD:
       return {
         ...state,
