@@ -2,7 +2,7 @@
 const mainRoutes = {
 	home: '/',
 	food: '/food',
-	createFood: '/food/new',
+	editFood: '/food/edit',
 	showFood: '/food/:id/show',
 	user: '/user',
 	combination: '/combination',

@@ -1,14 +1,14 @@
 import axios from 'axios'
-import { food, user, combination } from '../../routes.js'
+import { food, user, combination, changed, deleted } from '../../routes.js'
 import { GET_FOOD, POST_FOOD, POST_USER, GET_USER, POST_COMBINATION } from './constrain'
 
 /// Function get food
 export function getFood(){
   return async function (dispatch) {
-    try{
+    try {
       const foods = await axios.get(food)
-
-      return dispatch({
+      
+      return await dispatch({
         type: GET_FOOD,
         payload: foods.data
       })
@@ -22,7 +22,7 @@ export function getFood(){
 /// Function post food
 export function postFood({Name, Description}){
   return async function (dispatch) {
-    try{
+    try {
       const foods = await axios.post(food,{Name, Description})
 
       console.log(foods.data)
@@ -30,6 +30,34 @@ export function postFood({Name, Description}){
         type: POST_FOOD,
         payload: foods.data
       })
+    }
+    catch(err){
+      alert(err.message)
+    }
+  }
+}
+
+/// Function put food
+export function putFood({Name, Description, _id}){
+  return async function (dispatch) {
+    try {
+      
+      const updatedFood = await axios.put(changed,{Name, Description, _id})
+      
+      return dispatch(getFood())
+    }
+    catch(err){
+      alert(err.message)
+    }
+  }
+}
+
+/// Function delete food
+export function deleteFood({_id}){
+  return async function (dispatch) {
+    try {
+      const deletedFood = await axios.delete(deleted, {data: { _id }})
+      return dispatch(getFood())
     }
     catch(err){
       alert(err.message)
