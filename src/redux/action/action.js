@@ -42,7 +42,7 @@ export function putFood({Name, Description, _id}){
   return async function (dispatch) {
     try {
       
-      const updatedFood = await axios.put(changed,{Name, Description, _id})
+      await axios.put(changed,{Name, Description, _id})
       
       return dispatch(getFood())
     }
@@ -56,7 +56,9 @@ export function putFood({Name, Description, _id}){
 export function deleteFood({_id}){
   return async function (dispatch) {
     try {
-      const deletedFood = await axios.delete(deleted, {data: { _id }})
+
+      await axios.delete(deleted, {data: { _id }})
+      
       return dispatch(getFood())
     }
     catch(err){
