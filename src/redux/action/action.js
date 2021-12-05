@@ -39,22 +39,22 @@ export function postFood({Name, Description}){
 
 
 /// Function to create user account
-export function createUser({firstName, lastName, mail, password, phone, adress, numeration}) {
+export function createUser({firstName, lastName, mail, password, phone, adress, numeration, postalCode}) {
   return async function (dispatch) {
     try{
 
       // Envio de informacion a la base de datos
-      const info = {firstName, lastName, mail, password, phone, adress: adress+ '-' +numeration}
-      await axios.post(user, info)
+      const info = {firstName, lastName, mail, password, phone, adress: adress+ '-' +numeration, postalCode}
+      const newUser = await axios.post(user, info)
   
       // Guardar la informacion del usuario en su propia computadora
-      const save = JSON.stringify({firstName, lastName, mail, password, phone, adress, numeration})
+      const save = JSON.stringify(newUser.data)
       localStorage.infoUser = save
 
       alert('Exitoso')
       return dispatch({
         type: POST_USER,
-        payload: {mail}
+        payload: newUser.data
       })
     }
     catch(err){
@@ -65,18 +65,19 @@ export function createUser({firstName, lastName, mail, password, phone, adress, 
 
 
 /// Function get acount
-export function getAccount({mail, password}){
+export function getAccount({mail, password, token}){
   return async function(dispatch){
     try{
-      const account = await axios.get(`${user}/${mail}/${password}`)
+      const account = await axios.get(`${user}/${mail}/${password}/${token}`)
 
       // Guardar la informacion del usuario en su propia computadora
-      const save = JSON.stringify(account.data)
+      const local = localStorage && JSON.parse(localStorage.infoUser)
+      const save = JSON.stringify({...local, token: account.data})
       localStorage.infoUser = save
 
       return dispatch({
         type: GET_USER,
-        payload: {mail: account.data.mail}
+        payload: {token: account.data}
       })
     }
     catch(err){
