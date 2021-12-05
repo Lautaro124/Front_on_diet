@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
 import PropTypes from 'prop-types'
 import {useDispatch} from 'react-redux'
 import {Formik, Form} from 'formik'
-import {Container, Grid, Typography} from '@mui/material'
+import { Container, Grid, Typography } from '@mui/material'
+import PasswordField from '../../formsUI/PasswordField'
+import ReCAPTCHA from 'react-google-recaptcha'
 import Textfield from '../../formsUI/TextField'
 import SelectField from '../../formsUI/SelectField'
 import DatePicker from '../../formsUI/DatePicker'
@@ -16,9 +18,13 @@ export default function FormComponent({
 	options,
 	submitText,
 	submitFunc,
+	captcha
 }) {
+	const reCaptcha = () => {
+		console.log('Captcha realizado')
+	}
 	const dispatch = useDispatch()
-
+	const captchaRef = useRef(null)
 	return (
 		<Container>
 			<div>
@@ -48,6 +54,14 @@ export default function FormComponent({
 									>
 										{field.type === 'text' && (
 											<Textfield
+												name={field.name}
+												id={field.id}
+												key={`${field.id}Field`}
+												label={field.label}
+											/>
+										)}
+										{field.type === 'password' && (
+											<PasswordField
 												name={field.name}
 												id={field.id}
 												key={`${field.id}Field`}
@@ -90,6 +104,16 @@ export default function FormComponent({
 								{submitText}
 							</SubmitButton>
 						</Grid>
+						{captcha && (
+							<div className="captcha-container">
+								<ReCAPTCHA
+									ref={captchaRef}
+									sitekey='6Le_4E0dAAAAAOFuwAH1Xx7ZWP4cvszYTx3lis6W'
+									onChange={reCaptcha}
+									className='captcha'
+								/>
+							</div>
+						)}
 					</Form>
 				</Formik>
 			</div>
