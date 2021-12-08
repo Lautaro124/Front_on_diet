@@ -13,6 +13,12 @@ const initialState = {
 			id: 'home',
 		},
 		{
+			name: 'about',
+			label: 'Acerca de nosotros',
+			uri: mainRoutes.about,
+			id: 'about',
+		},
+		{
 			name: 'editFood',
 			label: 'Editar Comidas',
 			uri: mainRoutes.editFood,

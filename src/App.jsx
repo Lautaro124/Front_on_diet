@@ -9,6 +9,7 @@ import Register from './pages/Register/Component'
 import Login from './pages/Login/Component'
 import Combination from './components/forms/createCombination/Combination'
 import Header from './components/header/Header'
+import About from './components/about/About'
 import BackFood from './pages/BackFood/Component'
 import {getRoutes} from './utils'
 import {Container} from '@mui/material'
@@ -39,6 +40,7 @@ function App() {
 					<main>
 						<Routes>
 							<Route path={mainRoutes.home} element={<Home />} />
+							<Route path={mainRoutes.about} element={<About />}/>
 							<Route
 								path={mainRoutes.editFood}
 								element={<BackFood />}

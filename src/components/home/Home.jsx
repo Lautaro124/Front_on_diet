@@ -14,12 +14,12 @@ export default function Home() {
   }
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} >
       <main className={styles.content}>
         <article className={styles.positionContainer}>
          <SimpleImageSlider
           width={'40%'}
-          height={'100%'}
+          height={'90%'}
           images={setImages}
           showBullets={false}
           showNavs={false}
@@ -34,10 +34,7 @@ export default function Home() {
           <Container fixed>
             <Stack spacing={2}>
               <Typography variant='h3'>{textHome.title}</Typography>
-              <Typography variant='span'>{textHome.firstText}</Typography>
-              <Typography variant='span'>{textHome.secondText}</Typography>
-              <Typography variant='span'>{textHome.trheeText}</Typography>
-              <Typography variant='span'>{textHome.fourtyText}</Typography>
+              <Typography variant='span'>{textHome.slogan}</Typography>
               <Button>{textHome.about}</Button>
             </Stack>
           </Container>
