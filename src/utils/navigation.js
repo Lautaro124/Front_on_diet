@@ -1,6 +1,7 @@
 
 const mainRoutes = {
 	home: '/',
+	about: '/about',
 	food: '/food',
 	editFood: '/food/edit',
 	showFood: '/food/:id/show',

@@ -2,7 +2,7 @@
 //////                                  Back URL                                   //////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-const url = 'http://localhost:3001'
+const url = 'https://back-ondiet.vercel.app'
 
 export const food = `${url}/food`
 export const changed = `${url}/food/Changed`

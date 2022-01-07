@@ -2,8 +2,7 @@ import React, {useEffect} from 'react'
 import {postFood, getFood, putFood, deleteFood} from '../../redux/action/action'
 import {useSelector, useDispatch} from 'react-redux'
 import TableList from '../../components/TableList'
-import {Container, Grid} from '@mui/material'
-
+import {Container, Grid, Box} from '@mui/material'
 
 const columns = [
 	{title: 'Nombre', field: 'Name', align: 'left', sorting: false},
@@ -25,16 +24,18 @@ const BackFood = () => {
 
 	return (
 		<Container className="tablelist-container">
-			<Grid>
-				<TableList
-					list={foodList}
-					columns={columns}
-					tableTitle='Editar Comidas'
-					onSubmit={postFood}
-					onUpdate={putFood}
-					onDelete={deleteFood}
-				/>
-			</Grid>
+			<Box sx={{ overflow: 'auto'}}>
+				<Grid>
+					<TableList
+						list={foodList}
+						columns={columns}
+						tableTitle='Editar tus comidas'
+						onSubmit={postFood}
+						onUpdate={putFood}
+						onDelete={deleteFood}
+					/>
+				</Grid>
+			</Box>
 		</Container>
 	)
 }
