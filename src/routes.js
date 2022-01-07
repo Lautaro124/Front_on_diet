@@ -8,6 +8,7 @@ export const food = `${url}/food`
 export const changed = `${url}/food/Changed`
 export const deleted = `${url}/food/Deleted`
 export const user = `${url}/user`
+export const login = `${url}/user/login`
 export const combination = `${url}/combination`
 
 

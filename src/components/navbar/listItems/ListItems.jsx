@@ -12,8 +12,10 @@ import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import map from 'lodash/map'
 
+
 export default function ListItems({handleNavMenuClick, activeTab}) {
 	const navigationHeader = useSelector(state => state.navigationHeader)
+	const userInfo = useSelector(state => state.user)
 	// Estilos de la lista
 	const style = {
 		width: '35vh',
@@ -21,12 +23,6 @@ export default function ListItems({handleNavMenuClick, activeTab}) {
 		paddingTop: '0',
 		bgcolor: 'background.paper',
 		gap: 3,
-	}
-
-	// Variable local la cual contiene la informacion del usuario
-	let local = null
-	if (get(localStorage, 'infoUser')) {
-		return (local = JSON.parse(get(localStorage, 'infoUser')))
 	}
 
 	return (
@@ -37,14 +33,13 @@ export default function ListItems({handleNavMenuClick, activeTab}) {
 			component='nav'
 			aria-label='mailbox folders'
 		>
-			{local && (
+			{userInfo && (
+
 				<Box key='user-info'>
-					<Typography variant='span'>
-						{get(localStorage, 'firstName')}
-					</Typography>
-					<Typography variant='span'>
+					<Typography variant='h5' sx={{margin: '0.5em'}}>
+						{get(userInfo, 'firstName')}
 						{' '}
-						{get(localStorage, 'lastName')}
+						{get(userInfo, 'lastName')}
 					</Typography>
 				</Box>
 			)}

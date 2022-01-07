@@ -39,19 +39,10 @@ function App() {
 					<main>
 						<Routes>
 							<Route path={mainRoutes.home} element={<Home />} />
-							<Route
-								path={mainRoutes.editFood}
-								element={<BackFood />}
-							/>
+							<Route path={mainRoutes.editFood} element={<BackFood />} />
 							<Route path={mainRoutes.food} element={<Cards />} />
-							<Route
-								path={mainRoutes.register}
-								element={<Register />}
-							/>
-							<Route
-								path={mainRoutes.login}
-								element={<Login />}
-							/>
+							<Route path={mainRoutes.register} element={<Register />} />
+							<Route path={mainRoutes.login} element={<Login />} />
 							<Route
 								path={mainRoutes.createCombination}
 								element={<Combination />}
@@ -63,7 +54,7 @@ function App() {
 				</Container>
 			</ThemeProvider>
 		</BrowserRouter>
-	)
+	);
 }
 
 export default App

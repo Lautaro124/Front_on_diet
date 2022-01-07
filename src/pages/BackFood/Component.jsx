@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
 import {postFood, getFood, putFood, deleteFood} from '../../redux/action/action'
-
 import {useSelector, useDispatch} from 'react-redux'
 import TableList from '../../components/TableList'
-import {Container, Grid, Typography} from '@mui/material'
+import {Container, Grid} from '@mui/material'
+
 
 const columns = [
 	{title: 'Nombre', field: 'Name', align: 'left', sorting: false},
@@ -24,15 +24,12 @@ const BackFood = () => {
 	}, [dispatch])
 
 	return (
-		<Container>
+		<Container className="tablelist-container">
 			<Grid>
-				<Typography variant='h3' mt={3}>
-					Editar Comidas
-				</Typography>
 				<TableList
 					list={foodList}
 					columns={columns}
-					tableTitle='Comidas'
+					tableTitle='Editar Comidas'
 					onSubmit={postFood}
 					onUpdate={putFood}
 					onDelete={deleteFood}

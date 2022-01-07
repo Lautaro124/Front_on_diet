@@ -1,10 +1,11 @@
-import { GET_FOOD, POST_FOOD, POST_USER, GET_USER } from './action/constrain'
+import { GET_FOOD, POST_FOOD, POST_USER, GET_USER, LOGOUT } from './action/constrain'
 import { getRoutes } from '../utils';
 const mainRoutes = getRoutes('mainRoutes');
 
 const initialState = {
 	food: [],
-	user: {},
+  user: {},
+  isAuthenticate: false,
 	navigationHeader: [
 		{
 			name: 'home',
@@ -31,20 +32,6 @@ const initialState = {
 			id: 'createCombinations',
 		},
 	],
-	navigationSettings: [
-		{
-			name: 'myAccount',
-			label: 'Mi Cuenta',
-			uri: mainRoutes.user,
-			id: 'myAccount',
-		},
-		{
-			name: 'logout',
-			label: 'Salir',
-			uri: mainRoutes.home,
-			id: 'logout',
-		},
-	],
 };
 
 export default function reducer(state = initialState, action) {
@@ -65,13 +52,21 @@ export default function reducer(state = initialState, action) {
     case POST_USER:
       return{
         ...state,
-        user: action.payload
+        user: action.payload,
+        isAuthenticate: true
       }
     
     case GET_USER:
       return{
         ...state,
-        user: action.payload
+        user: action.payload,
+        isAuthenticate: true
+      }
+    case LOGOUT:
+      return{
+        ...state,
+        user: {},
+        isAuthenticate: false
       }
 
     default:

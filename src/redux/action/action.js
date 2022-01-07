@@ -1,6 +1,8 @@
 import axios from 'axios'
-import { food, user, combination, changed, deleted } from '../../routes.js'
-import { GET_FOOD, POST_FOOD, POST_USER, GET_USER, POST_COMBINATION } from './constrain'
+import { food, user, combination, changed, deleted, login } from '../../routes.js'
+import { GET_FOOD, POST_FOOD, POST_USER, GET_USER, POST_COMBINATION, LOGOUT } from './constrain'
+import {getRoutes} from '../../utils'
+const mainRoutes = getRoutes('mainRoutes')
 
 /// Function get food
 export function getFood(){
@@ -69,22 +71,62 @@ export function deleteFood({_id}){
 
 
 /// Function to create user account
-export function createUser({firstName, lastName, mail, password, phone, adress, numeration, postalCode}) {
-  return async function (dispatch) {
+export function createUser({
+	firstName,
+	lastName,
+	mail,
+	password,
+	phone,
+	adress,
+	numeration,
+	postalCode,
+	navigate,
+}) {
+	return async function (dispatch) {
+		try {
+			// Envio de informacion a la base de datos
+			const info = {
+				firstName,
+				lastName,
+				mail,
+				password,
+				phone,
+				adress: adress + "-" + numeration,
+				postalCode,
+			}
+			const newUser = await axios.post(user, info);
+
+			// Guardar la informacion del usuario en su propia computadora
+			const save = JSON.stringify(newUser.data);
+			localStorage.infoUser = save
+
+			navigate(mainRoutes.home)
+
+			return dispatch({
+				type: POST_USER,
+				payload: newUser.data,
+			})
+		} catch (err) {
+			alert(err);
+		}
+	};
+}
+
+
+/// Function get acount
+export function getAccount({values:{mail, password}, navigate}){
+  return async function(dispatch){
     try{
+      const account = await axios.post(login, {mail, password})
 
-      // Envio de informacion a la base de datos
-      const info = {firstName, lastName, mail, password, phone, adress: adress+ '-' +numeration, postalCode}
-      const newUser = await axios.post(user, info)
-  
-      // Guardar la informacion del usuario en su propia computadora
-      const save = JSON.stringify(newUser.data)
+      //Guardar la informacion del usuario en su propia computadora
+      const save = JSON.stringify(account.data)
+
       localStorage.infoUser = save
-
-      alert('Exitoso')
+      navigate(mainRoutes.home)
       return dispatch({
-        type: POST_USER,
-        payload: newUser.data
+        type: GET_USER,
+        payload: account.data
       })
     }
     catch(err){
@@ -93,21 +135,13 @@ export function createUser({firstName, lastName, mail, password, phone, adress, 
   }
 }
 
-
-/// Function get acount
-export function getAccount({mail, password, token}){
+export function logout({navigate}){
   return async function(dispatch){
     try{
-      const account = await axios.get(`${user}/${mail}/${password}/${token}`)
-
-      // Guardar la informacion del usuario en su propia computadora
-      const local = localStorage && JSON.parse(localStorage.infoUser)
-      const save = JSON.stringify({...local, token: account.data})
-      localStorage.infoUser = save
-
+      localStorage.removeItem('infoUser')
+      navigate(mainRoutes.home)
       return dispatch({
-        type: GET_USER,
-        payload: {token: account.data}
+        type: LOGOUT
       })
     }
     catch(err){

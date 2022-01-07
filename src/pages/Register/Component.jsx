@@ -1,6 +1,7 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import {Container, Grid, Typography} from '@mui/material'
-import FormComponent from '../../components/forms/FormComponent'
+import RegisterForm from '../../components/forms/RegisterForm'
 import CardComponent from '../../components/Card'
 import {createUser} from '../../redux/action/action'
 import { getRoutes } from '../../utils'
@@ -10,6 +11,7 @@ const mainRoutes = getRoutes('mainRoutes')
 
 
 const Register = () => {
+	const navigate = useNavigate()
 	return (
 		<Container my={5}>
 			<Grid my={5}>
@@ -22,12 +24,13 @@ const Register = () => {
 					<Typography variant='h3' my={2}>
 						Registro
 					</Typography>
-					<FormComponent
+					<RegisterForm
 						initialValue={initialValue}
 						fields={registerFields}
 						shape={shapeRegister}
 						submitText='Registrarse'
 						submitFunc={createUser}
+						navigate={navigate}
 						captcha
 					/>
 				</CardComponent>

@@ -1,25 +1,31 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {Formik, Form} from 'formik'
 import { Container, Grid, Typography } from '@mui/material'
 import PasswordField from '../../formsUI/PasswordField'
+import ReCAPTCHA from 'react-google-recaptcha'
 import Textfield from '../../formsUI/TextField'
 import SelectField from '../../formsUI/SelectField'
 import DatePicker from '../../formsUI/DatePicker'
 import map from 'lodash/map'
 import SubmitButton from '../../formsUI/SubmitButton'
 
-export default function FormComponent({
+export default function RegisterForm({
 	initialValue,
 	fields,
 	shape,
 	options,
 	submitText,
 	submitFunc,
+	captcha,
 	navigate
 }) {
+	const reCaptcha = () => {
+		console.log('Captcha realizado')
+	}
 	const dispatch = useDispatch()
+	const captchaRef = useRef(null)
 	return (
 		<Container>
 			<div>
@@ -27,7 +33,15 @@ export default function FormComponent({
 					initialValues={initialValue}
 					validationSchema={shape}
 					onSubmit={values => {
-						dispatch(submitFunc({values, navigate}))
+						 if (!captchaRef.current.getValue()) {
+								alert(
+									'Se necesita el recapcha hecho para proseguir'
+								)
+							} else {
+								dispatch(
+									submitFunc({...values, phone: '+549-' + values.phone, navigate})
+								)
+							}
 					}}
 				>
 					<Form>
@@ -99,6 +113,16 @@ export default function FormComponent({
 								{submitText}
 							</SubmitButton>
 						</Grid>
+						{captcha && (
+							<div className="captcha-container">
+								<ReCAPTCHA
+									ref={captchaRef}
+									sitekey='6Le_4E0dAAAAAOFuwAH1Xx7ZWP4cvszYTx3lis6W'
+									onChange={reCaptcha}
+									className='captcha'
+								/>
+							</div>
+						)}
 					</Form>
 				</Formik>
 			</div>
@@ -106,7 +130,7 @@ export default function FormComponent({
 	)
 }
 
-FormComponent.propTypes = {
+RegisterForm.propTypes = {
 	initialValue: PropTypes.object.isRequired,
 	fields: PropTypes.array.isRequired,
 	shape: PropTypes.object.isRequired,

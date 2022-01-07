@@ -24,7 +24,6 @@
 .btn-register,
 .btn-login {
   color: var(--black) !important;
-  text-shadow: 0px 0px 3px var(--white);
   font-weight: 700 !important;
 }
 
@@ -39,7 +38,6 @@
 .btn-register:hover,
 .btn-login:hover {
   color: var(--white) !important;
-  text-shadow: none;
 }
 
 .btn-register:hover {
@@ -48,4 +46,8 @@
 
 .btn-login:hover {
   background-color: var(--primary) !important ;
+}
+
+header {
+  height: 10vh;
 }
